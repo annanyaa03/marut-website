@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marut FCU | Fully Open Source Tri-Mode Flight Control Unit</title>
+    <meta name="description" content="India's first fully open source tri-mode Flight Control Unit. Under a unified architecture.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="2" width="20" height="20" rx="2" stroke="#FFD600" stroke-width="2"/>
+                    <path d="M2 12H22M12 2V22" stroke="#FFD600" stroke-width="2"/>
+                </svg>
+                <span>MARUT</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">HOME</a></li>
+                <li><a href="#technology">TECHNOLOGY</a></li>
+                <li><a href="#opensource">OPEN SOURCE</a></li>
+                <li><a href="#community">COMMUNITY</a></li>
+                <li><a href="#roadmap">ROADMAP</a></li>
+            </ul>
+            <a href="https://github.com/marut-fcuproject/marut-fcu" class="btn btn-github-outline">
+                <i class="ti ti-brand-github"></i> GITHUB
+            </a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="ti ti-menu-2"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-bg-overlay">
+                <img src="pcb_image_hero.png" alt="PCB Background" class="hero-bg-img">
+            </div>
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="hero-label-wrapper">
+                        <span class="hero-label">BUILT BY THE COMMUNITY. NOT CONTROLLED BY CORPORATIONS.</span>
+                        <div class="hero-label-line"></div>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="text-white">INDIA'S FIRST</span><br>
+                        <span class="text-yellow">FULLY OPEN</span><br>
+                        <span class="text-yellow">SOURCE</span><br>
+                        <span class="text-white">TRI-MODE FCU</span>
+                    </h1>
+                    <p class="hero-subtitle">Under a unified architecture.</p>
+                    <p class="hero-description">A fully open source tri-mode Flight Control Unit. All in the making by a community of passionate innovators and contributors.</p>
+                    <div class="hero-actions">
+                        <a href="#technology" class="btn btn-primary">&lt;/&gt; EXPLORE TECHNOLOGY &rarr;</a>
+                        <a href="https://github.com/marut-fcuproject/marut-fcu" class="btn btn-secondary"><i class="ti ti-brand-github"></i> VIEW ON GITHUB</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <div class="container features-grid">
+                <div class="feature-card">
+                    <i class="ti ti-lock-open icon-yellow"></i>
+                    <h3>FULLY OPEN SOURCE</h3>
+                    <p>Schematics, PCB, firmware, and docs — all open. No locks. No secrets.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-bolt icon-yellow"></i>
+                    <h3>TRI-MODE SUPPORT</h3>
+                    <p>Fixed Wing, VTOL, Multirotor. One FCU. Any platform.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-layers-linked icon-yellow"></i>
+                    <h3>UNIFIED ARCHITECTURE</h3>
+                    <p>One design. Maximum compatibility. Infinite possibilities.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="ti ti-users-group icon-yellow"></i>
+                    <h3>BUILT BY COMMUNITY</h3>
+                    <p>By innovators. For innovators. Forever improving.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="technology" class="technology-section" style="background-image: url('backdrop.png'); background-size: cover; background-position: center;">
+            <div class="technology-overlay"></div>
+            <div class="container relative z-10">
+                <div class="section-header">
+                    <h2>THE TECHNOLOGY</h2>
+                    <p class="section-subtitle">One FCU. Three modes. Infinite possibilities.</p>
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <i class="ti ti-plane icon-large icon-yellow"></i>
+                        <h3>FIXED WING</h3>
+                        <p>Optimised PID loops for fixed-wing aerodynamics, with full support for traditional rudder/elevator/aileron configurations.</p>
+                    </div>
+                    <div class="tech-card">
+                        <i class="ti ti-drone icon-large icon-yellow"></i>
+                        <h3>VTOL</h3>
+                        <p>Seamless transition logic between hover and cruise modes. Handles tilt-rotor, tailsitter, and hybrid VTOL configurations.</p>
+                    </div>
+                    <div class="tech-card">
+                        <i class="ti ti-propeller icon-large icon-yellow"></i>
+                        <h3>MULTIROTOR</h3>
+                        <p>Battle-tested multirotor firmware with support for quadcopters, hexacopters, octocopters, and custom frame geometries.</p>
+                    </div>
+                </div>
+                <div class="tech-banner">
+                    <p>All three modes. One unified codebase. One community.</p>
+                    <a href="https://github.com/marut-fcuproject/marut-fcu" class="btn btn-primary">EXPLORE THE ARCHITECTURE &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="opensource" class="opensource-section">
+            <div class="container opensource-container">
+                <div class="opensource-content">
+                    <h2>FULLY OPEN. FULLY YOURS.</h2>
+                    <p>Every schematic, every firmware commit, every PCB layout — open to the world. Fork it, improve it, build on it. No CLAs. No commercial locks. Just open collaboration.</p>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <i class="ti ti-star-filled icon-yellow"></i> ★ 0 Stars
+                        </div>
+                        <div class="stat-item">
+                            <i class="ti ti-users icon-yellow"></i> 👥 0 Contributors
+                        </div>
+                    </div>
+                    <a href="https://github.com/marut-fcuproject/marut-fcu" class="btn btn-primary mt-4">VIEW ON GITHUB &rarr;</a>
+                </div>
+                <div class="opensource-terminal">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="terminal-body">
+                        <pre><code><span class="prompt">$</span> git clone https://github.com/marut-fcuproject/marut-fcu
+<span class="prompt">$</span> cd marut-fcu
+<span class="prompt">$</span> make configure TARGET=VTOL
+<span class="output">> Configuring Marut FCU v0.1.0...
+> Target: VTOL ✓
+> Build system: Ready ✓</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="community" class="community-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>BUILT BY THE COMMUNITY</h2>
+                    <p class="text-muted">Join a growing team of engineers, pilots, and open-source enthusiasts.</p>
+                </div>
+                <div class="community-grid">
+                    <div class="community-card">
+                        <i class="ti ti-code icon-yellow"></i>
+                        <h3>Contribute Code</h3>
+                        <p>Submit PRs, fix bugs, build features.</p>
+                    </div>
+                    <div class="community-card">
+                        <i class="ti ti-bug icon-yellow"></i>
+                        <h3>Report Issues</h3>
+                        <p>Help us find and squash problems.</p>
+                    </div>
+                    <div class="community-card">
+                        <i class="ti ti-share icon-yellow"></i>
+                        <h3>Spread the Word</h3>
+                        <p>Star the repo. Tell your friends.</p>
+                    </div>
+                </div>
+                <div class="contributors-area">
+                    <p class="contributors-label">Our Contributors</p>
+                    <div class="avatars-row">
+                        <div class="avatar">JM</div>
+                        <div class="avatar">SP</div>
+                        <div class="avatar">AK</div>
+                        <div class="avatar">RJ</div>
+                        <div class="avatar">NV</div>
+                        <div class="avatar">TS</div>
+                        <div class="avatar">DL</div>
+                        <div class="avatar">RV</div>
+                        <div class="avatar">KP</div>
+                        <div class="avatar">SB</div>
+                    </div>
+                    <a href="https://github.com/marut-fcuproject/marut-fcu" class="text-link mt-4 inline-block">JOIN US ON GITHUB &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="roadmap-section">
+            <div class="container roadmap-container">
+                <h2>ROADMAP</h2>
+                <div class="timeline">
+                    <div class="timeline-item done">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="status-badge status-done">✅ Done</span>
+                            <h4>Core firmware architecture</h4>
+                        </div>
+                    </div>
+                    <div class="timeline-item done">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="status-badge status-done">✅ Done</span>
+                            <h4>Fixed Wing mode — alpha</h4>
+                        </div>
+                    </div>
+                    <div class="timeline-item progress">
+                        <div class="timeline-dot pulsing"></div>
+                        <div class="timeline-content">
+                            <span class="status-badge status-progress">🔄 In Progress</span>
+                            <h4>Multirotor mode — beta</h4>
+                        </div>
+                    </div>
+                    <div class="timeline-item progress">
+                        <div class="timeline-dot pulsing"></div>
+                        <div class="timeline-content">
+                            <span class="status-badge status-progress">🔄 In Progress</span>
+                            <h4>VTOL transition logic</h4>
+                        </div>
+                    </div>
+                    <div class="timeline-item planned">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="status-badge status-planned">🔲 Planned</span>
+                            <h4>Hardware reference design v1</h4>
+                        </div>
+                    </div>
+                    <div class="timeline-item planned">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="status-badge status-planned">🔲 Planned</span>
+                            <h4>Companion computer integration</h4>
+                        </div>
+                    </div>
+                    <div class="timeline-item planned">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="status-badge status-planned">🔲 Planned</span>
+                            <h4>Ground control station plugin</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="blog-section">
+            <div class="container">
+                <h2>LATEST UPDATES</h2>
+                <div class="blog-grid">
+                    <div class="blog-card">
+                        <span class="category-tag">ANNOUNCEMENT</span>
+                        <h3>Marut FCU Alpha Release</h3>
+                        <p class="blog-meta">Oct 12, 2024 · 3 min read</p>
+                        <p class="blog-excerpt">We are thrilled to announce the alpha release of the Marut firmware for fixed wing platforms...</p>
+                        <a href="#" class="text-link">Read More &rarr;</a>
+                    </div>
+                    <div class="blog-card">
+                        <span class="category-tag">DEVELOPMENT</span>
+                        <h3>VTOL Transition Logic Deep Dive</h3>
+                        <p class="blog-meta">Sep 28, 2024 · 5 min read</p>
+                        <p class="blog-excerpt">Exploring the mathematics and PID tuning required for seamless hover-to-cruise transitions...</p>
+                        <a href="#" class="text-link">Read More &rarr;</a>
+                    </div>
+                    <div class="blog-card">
+                        <span class="category-tag">COMMUNITY</span>
+                        <h3>Community Hardware Design Review</h3>
+                        <p class="blog-meta">Sep 15, 2024 · 2 min read</p>
+                        <p class="blog-excerpt">Join us for a live design review of the v1 hardware reference board architecture...</p>
+                        <a href="#" class="text-link">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="2" width="20" height="20" rx="2" stroke="#FFD600" stroke-width="2"/>
+                        <path d="M2 12H22M12 2V22" stroke="#FFD600" stroke-width="2"/>
+                    </svg>
+                    <span>MARUT</span>
+                </div>
+                <p>India's first fully open source tri-mode FCU.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="GitHub"><i class="ti ti-brand-github icon-large"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="ti ti-brand-x icon-large"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Product</h4>
+                    <a href="#technology">Technology</a>
+                    <a href="#opensource">Open Source</a>
+                    <a href="#roadmap">Roadmap</a>
+                </div>
+                <div class="link-column">
+                    <h4>Community</h4>
+                    <a href="#github">GitHub</a>
+                    <a href="#community">Contributors</a>
+                    <a href="#blog">Blog</a>
+                </div>
+                <div class="link-column">
+                    <h4>Resources</h4>
+                    <a href="#docs">Documentation</a>
+                    <a href="#schematics">Schematics</a>
+                    <a href="#firmware">Firmware</a>
+                </div>
+                <div class="link-column">
+                    <h4>Project</h4>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#license">License</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 Marut FCU Project. Released under the GPL-3.0 License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
