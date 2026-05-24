@@ -8,7 +8,7 @@ type ButtonProps = {
 }
 
 export default function Button({ variant, children, href, onClick }: ButtonProps) {
-  const baseClasses = "rounded px-6 py-3 text-sm font-semibold uppercase tracking-widest transition-colors inline-block text-center"
+  const baseClasses = "rounded px-6 py-3 text-sm font-semibold uppercase tracking-widest transition-colors inline-block text-center w-full sm:w-auto"
   
   const variantClasses = variant === 'primary' 
     ? "bg-yellow text-dark hover:bg-yellow-hover"
