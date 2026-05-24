@@ -55,10 +55,10 @@ export default function Hero() {
             <Image
               src="/pcb_image_hero.png"
               alt="Marut FCU PCB"
-              width={720}
-              height={720}
+              width={640}
+              height={640}
               priority
-              className="relative z-10 max-w-full max-h-[720px] h-auto object-contain select-none filter drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] hover:scale-[1.03] transition-transform duration-500"
+              className="relative z-10 max-w-full max-h-[640px] h-auto object-contain select-none filter drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] hover:scale-[1.03] transition-transform duration-500"
             />
           </div>
         </div>
