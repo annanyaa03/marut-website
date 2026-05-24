@@ -21,7 +21,7 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto px-6 pt-16 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 max-w-2xl">
+          <div className="lg:col-span-6 max-w-2xl">
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow leading-relaxed mb-4">
               BUILT BY THE COMMUNITY.<br />
             </div>
@@ -49,16 +49,16 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-          <div className="hidden lg:flex lg:col-span-5 justify-end items-center relative">
+          <div className="hidden lg:flex lg:col-span-6 justify-end items-center relative">
             {/* Ambient Glow */}
             <div className="absolute inset-0 bg-yellow/5 rounded-full blur-[100px] pointer-events-none" />
             <Image
               src="/pcb_image_hero.png"
               alt="Marut FCU PCB"
-              width={500}
-              height={500}
+              width={600}
+              height={600}
               priority
-              className="relative z-10 max-w-full max-h-[500px] h-auto object-contain select-none filter drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] hover:scale-[1.03] transition-transform duration-500"
+              className="relative z-10 max-w-full max-h-[600px] h-auto object-contain select-none filter drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] hover:scale-[1.03] transition-transform duration-500"
             />
           </div>
         </div>
