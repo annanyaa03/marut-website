@@ -37,9 +37,9 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">Resources</h4>
-            <a href="#" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">Documentation</a>
-            <a href="#" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">Schematics</a>
-            <a href="#" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">Firmware</a>
+            <a href="/documentation" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">Documentation</a>
+            <a href="/schematics" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">Schematics</a>
+            <a href="/firmware" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">Firmware</a>
           </div>
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">Project</h4>
