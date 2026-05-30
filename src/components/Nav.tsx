@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { IconBrandGithub, IconMenu2 } from '@tabler/icons-react'
 
@@ -84,11 +85,7 @@ export default function Nav() {
     }`}>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="/" className="inline-flex items-center gap-2">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="14" width="14" height="4" fill="#00FF55" />
-            <rect x="5" y="10" width="14" height="4" fill="#00FF55" />
-            <rect x="8" y="6" width="14" height="4" fill="#00FF55" />
-          </svg>
+          <Image src="/marut_logo.png" alt="Marut FCU Logo" width={28} height={28} className="object-contain" />
           <span className="font-black uppercase tracking-widest text-white text-lg">MARUT</span>
         </a>
 
