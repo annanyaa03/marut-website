@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 type ButtonProps = {
   variant: 'primary' | 'secondary'
@@ -17,6 +18,14 @@ export default function Button({ variant, children, href, onClick }: ButtonProps
   const classes = `${baseClasses} ${variantClasses}`
   
   if (href) {
+    if (href.startsWith('/')) {
+      return (
+        <Link href={href} className={classes} onClick={onClick}>
+          {children}
+        </Link>
+      )
+    }
+
     return (
       <a href={href} className={classes} onClick={onClick}>
         {children}
@@ -25,7 +34,7 @@ export default function Button({ variant, children, href, onClick }: ButtonProps
   }
   
   return (
-    <button onClick={onClick} className={classes}>
+    <button type="button" onClick={onClick} className={classes}>
       {children}
     </button>
   )
