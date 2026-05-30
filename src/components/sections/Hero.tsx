@@ -11,6 +11,7 @@ export default function Hero() {
           src="/backdrop.png"
           alt="Hero Backdrop"
           fill
+          sizes="100vw"
           priority
           className="object-cover object-center"
         />
