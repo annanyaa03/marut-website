@@ -69,7 +69,7 @@ export default function Nav() {
     handleScroll()
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [isHome])
 
   return (
