@@ -54,30 +54,25 @@ export async function GET() {
     const repoData = (await repoRes.json()) as GitHubRepoData;
 
     // Fetch contributors with pagination
-    let contributors: GitHubContributor[] = [];
-    let page = 1;
-    let hasMore = true;
-    
-    while (hasMore && page <= 5) {
-      const contribRes = await fetch(`https://api.github.com/repos/lawslefthand/Marut_FCU/contributors?per_page=100&page=${page}`, {
+    const contributorResponses = await Promise.all(
+      [1, 2, 3, 4, 5].map((page) => fetch(`https://api.github.com/repos/lawslefthand/Marut_FCU/contributors?per_page=100&page=${page}`, {
         headers,
         next: { revalidate: 3600 },
-      });
+      }))
+    );
+
+    const contributorPages = await Promise.all(
+      contributorResponses.map(async (contribRes) => {
       if (!contribRes.ok) {
         throw new Error(`GitHub contributors API returned status ${contribRes.status}`);
       }
-      const pageData = await contribRes.json();
-      if (!Array.isArray(pageData) || pageData.length === 0) {
-        hasMore = false;
-      } else {
-        contributors = [...contributors, ...(pageData as GitHubContributor[])];
-        if (pageData.length < 100) {
-          hasMore = false;
-        } else {
-          page++;
-        }
-      }
-    }
+        return contribRes.json();
+      })
+    );
+
+    const contributors = contributorPages
+      .filter((pageData): pageData is GitHubContributor[] => Array.isArray(pageData))
+      .flat();
 
     // Filter out bots
     const humanContributors = contributors.filter(
