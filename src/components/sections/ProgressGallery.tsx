@@ -75,15 +75,15 @@ export default function ProgressGallery() {
         <div className="mb-16 text-center">
           <SectionHeading
             label="PCB EVOLUTION"
-            heading="3D Renders (TH Version)"
+            heading="3D Renders"
             subheading="Visualizing the through-hole prototype board architecture"
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {galleryImages.map((image, idx) => (
-            <div 
-              key={image.src} 
+            <div
+              key={image.src}
               className="group bg-dark-card border border-dark-border rounded-lg overflow-hidden flex flex-col transition-all duration-300 hover:border-yellow/40 hover:shadow-[0_0_20px_rgba(0,255,85,0.05)]"
             >
               {/* Image container */}
@@ -121,7 +121,7 @@ export default function ProgressGallery() {
                   {image.description}
                 </p>
                 <button
-                    type="button"
+                  type="button"
                   onClick={() => openLightbox(idx)}
                   className="text-yellow text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 hover:text-yellow-hover transition-colors w-fit pt-2 mt-auto"
                 >
@@ -146,7 +146,7 @@ export default function ProgressGallery() {
                 {galleryImages[lightboxIndex].title}
               </h4>
             </div>
-            <button type="button" 
+            <button type="button"
               onClick={closeLightbox}
               aria-label="Close image lightbox"
               className="text-white/60 hover:text-white bg-dark-surface p-2 rounded-full border border-dark-border transition-colors"
@@ -159,7 +159,7 @@ export default function ProgressGallery() {
           <div className="flex items-center justify-between max-w-7xl mx-auto w-full flex-1 my-4 gap-4 relative">
             {/* Left Nav */}
             <button
-                    type="button"
+              type="button"
               onClick={() => navigateLightbox('prev')}
               aria-label="View previous image"
               className="hidden sm:flex text-white bg-dark-surface/80 hover:bg-yellow hover:text-dark p-3 rounded-full border border-dark-border hover:border-yellow transition-all items-center justify-center z-10"
@@ -181,7 +181,7 @@ export default function ProgressGallery() {
 
             {/* Right Nav */}
             <button
-                    type="button"
+              type="button"
               onClick={() => navigateLightbox('next')}
               aria-label="View next image"
               className="hidden sm:flex text-white bg-dark-surface/80 hover:bg-yellow hover:text-dark p-3 rounded-full border border-dark-border hover:border-yellow transition-all items-center justify-center z-10"
@@ -197,13 +197,13 @@ export default function ProgressGallery() {
             </p>
             {/* Mobile swipe/nav hint */}
             <div className="flex sm:hidden justify-center gap-6 mt-4">
-              <button type="button" 
+              <button type="button"
                 onClick={() => navigateLightbox('prev')}
                 className="flex items-center gap-1 text-xs font-bold tracking-widest text-yellow uppercase"
               >
                 <IconChevronLeft size={16} /> PREV
               </button>
-              <button type="button" 
+              <button type="button"
                 onClick={() => navigateLightbox('next')}
                 className="flex items-center gap-1 text-xs font-bold tracking-widest text-yellow uppercase"
               >
