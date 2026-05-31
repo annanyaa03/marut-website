@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import Button from '@/components/ui/Button'
-import { IconBrandGithub, IconMenu2 } from '@tabler/icons-react'
+import { IconBrandGithub, IconMenu2, IconChevronDown, IconBook, IconCpu, IconBinary } from '@tabler/icons-react'
 
 interface NavState {
   scrolled: boolean
@@ -23,12 +23,21 @@ export default function Nav() {
   const isHome = pathname === '/'
 
   const navItems = [
-    { href: isHome ? '#' : '/', id: 'home', label: 'HOME' },
-    { href: isHome ? '#technology' : '/#technology', id: 'technology', label: 'TECHNOLOGY' },
-    { href: isHome ? '#open-source' : '/#open-source', id: 'open-source', label: 'OPEN SOURCE' },
-    { href: isHome ? '#roadmap' : '/#roadmap', id: 'roadmap', label: 'ROADMAP' },
-    { href: isHome ? '#blog' : '/#blog', id: 'blog', label: 'BLOG' },
-    { href: isHome ? '#contact' : '/#contact', id: 'contact', label: 'CONTACT' },
+    { href: isHome ? '#' : '/', id: 'home', label: 'HOME', isDropdown: false },
+    { href: isHome ? '#technology' : '/#technology', id: 'technology', label: 'TECHNOLOGY', isDropdown: false },
+    { href: isHome ? '#open-source' : '/#open-source', id: 'open-source', label: 'OPEN SOURCE', isDropdown: false },
+    {
+      id: 'resources',
+      label: 'RESOURCES',
+      isDropdown: true,
+      dropdownItems: [
+        { href: '/documentation', label: 'Documentation', desc: 'Guides & API manuals', icon: IconBook },
+        { href: '/schematics', label: 'Schematics', desc: 'Interactive 3D PCB layout', icon: IconCpu },
+        { href: '/firmware', label: 'Firmware', desc: 'Downloadable binaries & source', icon: IconBinary },
+      ]
+    },
+    { href: isHome ? '#roadmap' : '/#roadmap', id: 'roadmap', label: 'ROADMAP', isDropdown: false },
+    { href: isHome ? '#contact' : '/#contact', id: 'contact', label: 'CONTACT', isDropdown: false },
   ]
 
   useEffect(() => {
@@ -39,26 +48,41 @@ export default function Nav() {
       if (!isHome) {
         nextActiveSection = ''
       } else if (window.scrollY >= 120) {
-        const sections = ['technology', 'open-source', 'roadmap', 'blog', 'contact']
-        const threshold = window.innerHeight * 0.4
+        const sectionsWithGallery = [
+          { id: 'technology', navId: 'technology' },
+          { id: 'open-source', navId: 'open-source' },
+          { id: 'gallery', navId: 'open-source' },
+          { id: 'developer-resources', navId: 'resources' },
+          { id: 'roadmap', navId: 'roadmap' },
+          { id: 'contact', navId: 'contact' },
+        ]
 
-        for (const sectionId of sections) {
-          const element = document.getElementById(sectionId)
-          if (element) {
-            const rect = element.getBoundingClientRect()
-            if (rect.top <= threshold && rect.bottom >= threshold) {
-              nextActiveSection = sectionId
-              break
+        const threshold = window.innerHeight * 0.4
+        let currentSection = 'home'
+        let minDistance = Infinity
+
+        for (const sec of sectionsWithGallery) {
+          const el = document.getElementById(sec.id)
+          if (el) {
+            const rect = el.getBoundingClientRect()
+            if (rect.top <= threshold && rect.bottom >= 0) {
+              const distance = Math.abs(rect.top - threshold)
+              if (distance < minDistance) {
+                minDistance = distance
+                currentSection = sec.navId
+              }
             }
           }
         }
 
-        const galleryElement = document.getElementById('gallery')
-        if (galleryElement) {
-          const rect = galleryElement.getBoundingClientRect()
-          if (rect.top <= threshold && rect.bottom >= threshold) {
-            nextActiveSection = 'open-source'
-          }
+        // Check if user has scrolled to the bottom of the page
+        const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50
+        if (isAtBottom) {
+          currentSection = 'contact'
+        }
+
+        if (currentSection !== 'home') {
+          nextActiveSection = currentSection
         }
       }
 
@@ -83,19 +107,61 @@ export default function Nav() {
         </Link>
 
         <div className="hidden md:flex items-center gap-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.id}
-              href={item.href}
-              className={`text-xs font-semibold uppercase tracking-widest transition-colors pb-0.5 border-b-2 ${
-                activeSection === item.id
-                  ? 'text-white border-yellow font-bold'
-                  : 'text-white/70 hover:text-white border-transparent'
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            if (item.isDropdown) {
+              return (
+                <div key={item.id} className="relative group">
+                  <button
+                    type="button"
+                    className="flex items-center gap-1 text-xs font-semibold uppercase tracking-widest transition-colors"
+                  >
+                    <span className={`pb-0.5 border-b-2 transition-colors ${
+                      activeSection === item.id
+                        ? 'text-white border-yellow font-bold'
+                        : 'text-white/70 border-transparent hover:text-white'
+                    }`}>
+                      {item.label}
+                    </span>
+                    <IconChevronDown size={12} className="text-white/70 group-hover:text-white group-hover:rotate-180 transition-all duration-200" />
+                  </button>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="bg-dark-card border border-dark-border rounded-lg shadow-xl py-3 px-2.5 grid gap-1.5">
+                      {item.dropdownItems?.map((sub) => {
+                        const SubIcon = sub.icon
+                        return (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            className="flex items-start gap-3 p-2 rounded-md hover:bg-white/5 transition-colors group/item"
+                          >
+                            <SubIcon size={16} className="text-yellow mt-0.5" />
+                            <div>
+                              <div className="text-xs font-bold text-white uppercase tracking-wider mb-0.5">{sub.label}</div>
+                              <div className="text-[10px] text-white/40 leading-snug">{sub.desc}</div>
+                            </div>
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+
+            return (
+              <Link
+                key={item.id}
+                href={item.href!}
+                className={`text-xs font-semibold uppercase tracking-widest transition-colors pb-0.5 border-b-2 ${
+                  activeSection === item.id
+                    ? 'text-white border-yellow font-bold'
+                    : 'text-white/70 hover:text-white border-transparent'
+                }`}
+              >
+                {item.label}
+              </Link>
+            )
+          })}
         </div>
 
         <div className="hidden md:block">
@@ -115,20 +181,46 @@ export default function Nav() {
 
       {mobileMenuOpen && (
         <div className="bg-dark-surface border-b border-dark-border px-6 py-4 flex flex-col gap-4 md:hidden">
-          {navItems.map((item) => (
-            <Link
-              key={item.id}
-              href={item.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`text-xs font-semibold uppercase tracking-widest transition-colors pb-0.5 border-b-2 w-fit ${
-                activeSection === item.id
-                  ? 'text-white border-yellow font-bold'
-                  : 'text-white/70 hover:text-white border-transparent'
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            if (item.isDropdown) {
+              return (
+                <div key={item.id} className="flex flex-col gap-2">
+                  <div className={`text-[10px] font-bold uppercase tracking-widest ${
+                    activeSection === item.id ? 'text-yellow' : 'text-white/40'
+                  }`}>
+                    {item.label}
+                  </div>
+                  <div className="pl-4 flex flex-col gap-3 border-l border-dark-border">
+                    {item.dropdownItems?.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="text-xs font-semibold uppercase tracking-widest text-white/70 hover:text-white transition-colors"
+                      >
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )
+            }
+
+            return (
+              <Link
+                key={item.id}
+                href={item.href!}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-xs font-semibold uppercase tracking-widest transition-colors pb-0.5 border-b-2 w-fit ${
+                  activeSection === item.id
+                    ? 'text-white border-yellow font-bold'
+                    : 'text-white/70 hover:text-white border-transparent'
+                }`}
+              >
+                {item.label}
+              </Link>
+            )
+          })}
           <div className="mt-2">
             <Button variant="secondary" href="https://github.com/lawslefthand/Marut_FCU/">
               <IconBrandGithub size={16} className="mr-2 inline" /> GITHUB
