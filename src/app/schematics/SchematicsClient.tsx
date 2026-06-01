@@ -122,20 +122,23 @@ export default function SchematicsClient() {
     tl.to('.scroll-build-pct', {
       innerText: 100,
       snap: { innerText: 1 },
-      duration: tl.duration()
+      duration: tl.duration(),
+      ease: 'none'
     }, 0)
 
     // Progress bar width
     tl.to('.scroll-build-bar', {
       width: '100%',
-      duration: tl.duration()
+      duration: tl.duration(),
+      ease: 'none'
     }, 0)
 
     // Dynamic glow element animation
     tl.to('.scroll-build-glow', {
       scale: 1.4,
       opacity: 0.7,
-      duration: tl.duration()
+      duration: tl.duration(),
+      ease: 'none'
     }, 0)
 
     return () => {
