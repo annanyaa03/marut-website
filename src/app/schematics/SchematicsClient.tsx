@@ -264,7 +264,7 @@ export default function SchematicsClient() {
               </div>
 
               {/* Right Column: Dynamic PCB Viewer */}
-              <div className="lg:col-span-7 flex justify-center items-center relative aspect-square w-full max-w-[420px] mx-auto md:max-w-none md:h-[450px]">
+              <div className="lg:col-span-7 flex justify-center items-center relative aspect-square w-full max-w-[420px] mx-auto md:max-w-none md:h-[454px]">
                 {buildSteps.map((step, idx) => (
                   <div
                     key={idx}
