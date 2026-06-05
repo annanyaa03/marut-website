@@ -1,6 +1,5 @@
 import { IconBrandGithub, IconBrandX } from '@tabler/icons-react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -8,7 +7,6 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
           <Link href="/" className="inline-flex items-center gap-2">
-            <Image src="/assets/marut_logo.png" alt="Marut FCU Logo" width={28} height={28} className="object-contain" />
             <span className="font-black uppercase tracking-widest text-white text-lg">MARUT</span>
           </Link>
           <p className="text-white/40 text-sm mt-4 max-w-xs leading-relaxed">

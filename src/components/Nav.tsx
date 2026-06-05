@@ -3,7 +3,6 @@
 import { useState, useEffect, useReducer } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { IconBrandGithub, IconMenu2, IconChevronDown, IconBook, IconCpu, IconBinary } from '@tabler/icons-react'
 
@@ -102,7 +101,6 @@ export default function Nav() {
     }`}>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="inline-flex items-center gap-2">
-          <Image src="/assets/marut_logo.png" alt="Marut FCU Logo" width={28} height={28} className="object-contain" />
           <span className="font-black uppercase tracking-widest text-white text-lg">MARUT</span>
         </Link>
 
