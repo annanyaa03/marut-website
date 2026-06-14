@@ -39,7 +39,7 @@ export default function Footer() {
             <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">Project</h4>
             <Link href="/#roadmap" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">About</Link>
             <Link href="/#contact" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">Contact</Link>
-            <a href="https://github.com/lawslefthand/Marut_FCU/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">License</a>
+            <a href="https://github.com/lawslefthand/Marut_FCU/blob/main/LICENSE.txt" target="_blank" rel="noopener noreferrer" className="block text-sm text-white/40 hover:text-white transition-colors mb-2">License</a>
           </div>
         </div>
       </div>
