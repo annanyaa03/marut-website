@@ -58,12 +58,13 @@ export default function Technology() {
         </Button>
       </div>
 
-      <DiagramModal
-        isOpen={viewerOpen}
-        onClose={() => setViewerOpen(false)}
-        svgPath="/assets/marut_full_architecture.svg"
-        title="Marut Full Architecture Diagram"
-      />
+      {viewerOpen && (
+        <DiagramModal
+          onClose={() => setViewerOpen(false)}
+          svgPath="/assets/marut_full_architecture.svg"
+          title="Marut Full Architecture Diagram"
+        />
+      )}
     </section>
   )
 }
