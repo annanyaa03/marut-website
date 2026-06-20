@@ -1,13 +1,13 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ReactFlow,
+import {
+  ReactFlow,
   Background,
   BackgroundVariant,
   Controls,
   MiniMap,
   type Node,
-  type Edge,
   useNodesState,
   useEdgesState,
   ReactFlowProvider,
@@ -18,37 +18,39 @@ import '@xyflow/react/dist/style.css';
 
 import MarutNode from './MarutNode';
 import { initialNodes, initialEdges, MarutNodeData } from './marutMindMapData';
-import { toggleCollapse } from './collapseUtils';
+import { toggleCollapse, getLayoutedElements } from './collapseUtils';
 
 const NODE_TYPES = { marutNode: MarutNode };
 
 const MINIMAP_NODE_COLOR = (node: Node) => {
   const data = node.data as MarutNodeData | undefined;
   switch (data?.category) {
-    case 'root':    return '#4A5568';
-    case 'branch':  return '#2D9E75';
+    case 'root': return '#4A5568';
+    case 'branch': return '#2D9E75';
     case 'section': return '#2B6CB0';
-    case 'task':    return '#6B46C1';
-    default:        return '#276749';
+    case 'task': return '#6B46C1';
+    default: return '#276749';
   }
 };
 
 function MindMapCanvas() {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node<MarutNodeData>>(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [rfInstance, setRfInstance] = useState<ReactFlowInstance<Node<MarutNodeData>> | null>(null);
+  const rfInstance = useRef<ReactFlowInstance<Node<MarutNodeData>> | null>(null);
   const initialized = useRef(false);
+  const [isInteractive, setIsInteractive] = useState(true);
 
   const handleToggle = useCallback(
     (nodeId: string) => {
-      setNodes((nds: Node<MarutNodeData>[]) => {
-        setEdges((eds: Edge[]) => {
-          const result = toggleCollapse(nodeId, nds, eds);
-          setNodes(result.nodes as Node<MarutNodeData>[]);
-          setEdges(result.edges);
-          return result.edges;
+      setNodes((currentNodes) => {
+        setEdges((currentEdges) => {
+          const { nodes: newNodes, edges: newEdges } = toggleCollapse(nodeId, currentNodes, currentEdges);
+          // We must update the edges using the functional state updater
+          // and we will update the nodes by returning the newNodes from the outer updater
+          setTimeout(() => setNodes(newNodes), 0);
+          return newEdges;
         });
-        return nds;
+        return currentNodes;
       });
     },
     [setNodes, setEdges]
@@ -62,12 +64,12 @@ function MindMapCanvas() {
   }, [handleToggle]);
 
   const fitView = useCallback(() => {
-    rfInstance?.fitView({ padding: 0.12, duration: 500 });
-  }, [rfInstance]);
+    rfInstance.current?.fitView({ padding: 0.12, duration: 500 });
+  }, []);
 
   const onInit = useCallback(
     (instance: ReactFlowInstance<Node<MarutNodeData>>) => {
-      setRfInstance(instance);
+      rfInstance.current = instance;
       if (!initialized.current) {
         initialized.current = true;
         setTimeout(() => instance.fitView({ padding: 0.12, duration: 600 }), 100);
@@ -81,6 +83,8 @@ function MindMapCanvas() {
     setEdges(initialEdges);
   }, [setNodes, setEdges]);
 
+  const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(nodes, edges);
+
   return (
     <div
       style={{
@@ -92,9 +96,50 @@ function MindMapCanvas() {
         border: '1px solid #2D3748',
       }}
     >
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        .react-flow__pane {
+          cursor: ${isInteractive ? 'grab' : 'default'} !important;
+        }
+        .react-flow__pane:active {
+          cursor: ${isInteractive ? 'grabbing' : 'default'} !important;
+        }
+        .react-flow__node {
+          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease-out !important;
+        }
+        .react-flow__edge-path {
+          transition: opacity 0.35s ease-out !important;
+        }
+        .react-flow__controls {
+          box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+          overflow: hidden;
+          border-radius: 8px;
+          border: 1px solid #2D3748 !important;
+        }
+        .react-flow__controls-button {
+          background: #1A2535 !important;
+          color: #BEE3F8 !important;
+          fill: #BEE3F8 !important;
+          border: none !important;
+          border-bottom: 1px solid #2D3748 !important;
+          transition: background 0.15s, color 0.15s !important;
+          width: 26px !important;
+          height: 26px !important;
+        }
+        .react-flow__controls-button:last-child {
+          border-bottom: none !important;
+        }
+        .react-flow__controls-button:hover {
+          background: #2D3748 !important;
+          color: #9AE6B4 !important;
+        }
+        .react-flow__controls-button svg {
+          fill: currentColor !important;
+        }
+      `}} />
       <ReactFlow
-        nodes={nodes}
-        edges={edges}
+        nodes={layoutedNodes}
+        edges={layoutedEdges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         nodeTypes={NODE_TYPES}
@@ -102,6 +147,13 @@ function MindMapCanvas() {
         fitView
         minZoom={0.15}
         maxZoom={2}
+        nodesDraggable={isInteractive}
+        nodesConnectable={isInteractive}
+        elementsSelectable={isInteractive}
+        panOnDrag={isInteractive}
+        zoomOnScroll={isInteractive}
+        zoomOnPinch={isInteractive}
+        zoomOnDoubleClick={isInteractive}
         defaultEdgeOptions={{
           style: { stroke: '#4A5568', strokeWidth: 1.5 },
           animated: false,
@@ -115,13 +167,7 @@ function MindMapCanvas() {
           color="#1E2D3D"
         />
 
-        <Controls
-          style={{
-            background: '#1A2535',
-            border: '1px solid #2D3748',
-            borderRadius: 8,
-          }}
-        />
+        <Controls onInteractiveChange={setIsInteractive} />
 
         <MiniMap
           nodeColor={MINIMAP_NODE_COLOR}
@@ -153,17 +199,18 @@ function MindMapCanvas() {
                 letterSpacing: '0.02em',
               }}
             >
-              Marut UAV System
+              Marut FCU
             </span>
             <span style={{ color: '#4A5568', fontSize: 12 }}>|</span>
             <button
               onClick={fitView}
+              type="button"
               style={{
                 background: 'transparent',
                 border: '1px solid #2D3748',
                 borderRadius: 6,
                 color: '#BEE3F8',
-                fontSize: 11,
+                fontSize: 12,
                 padding: '3px 10px',
                 cursor: 'pointer',
               }}
@@ -172,12 +219,13 @@ function MindMapCanvas() {
             </button>
             <button
               onClick={collapseAll}
+              type="button"
               style={{
                 background: 'transparent',
                 border: '1px solid #2D3748',
                 borderRadius: 6,
                 color: '#E9D8FD',
-                fontSize: 11,
+                fontSize: 12,
                 padding: '3px 10px',
                 cursor: 'pointer',
               }}
@@ -187,50 +235,6 @@ function MindMapCanvas() {
           </div>
         </Panel>
 
-        <Panel position="top-right">
-          <div
-            style={{
-              background: '#1A2535',
-              border: '1px solid #2D3748',
-              borderRadius: 8,
-              padding: '8px 12px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 5,
-            }}
-          >
-            {[
-              { color: '#68D391', label: 'Root / Branch' },
-              { color: '#63B3ED', label: 'Section' },
-              { color: '#B794F4', label: 'Task' },
-              { color: '#9AE6B4', label: 'Leaf' },
-            ].map(({ color, label }) => (
-              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <div
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
-                    background: color,
-                    flexShrink: 0,
-                  }}
-                />
-                <span style={{ fontSize: 11, color: '#A0AEC0' }}>{label}</span>
-              </div>
-            ))}
-            <div
-              style={{
-                borderTop: '1px solid #2D3748',
-                marginTop: 4,
-                paddingTop: 4,
-                fontSize: 10,
-                color: '#4A5568',
-              }}
-            >
-              Click ± to expand/collapse
-            </div>
-          </div>
-        </Panel>
       </ReactFlow>
     </div>
   );
