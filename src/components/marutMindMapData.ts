@@ -12,7 +12,7 @@ export type MarutNodeData = {
   category: NodeCategory;
   collapsed?: boolean;
   childIds?: string[];
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export const initialNodes: Node<MarutNodeData>[] = [
