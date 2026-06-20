@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
-import { IconZoomIn, IconZoomOut, IconMaximize, IconDownload, IconX } from '@tabler/icons-react'
+import Link from 'next/link'
+import { IconZoomIn, IconZoomOut, IconMaximize, IconDownload, IconX, IconSitemap } from '@tabler/icons-react'
 
 interface DiagramModalProps {
   onClose: () => void
@@ -46,9 +47,9 @@ export default function DiagramModal({ onClose, svgPath, title }: DiagramModalPr
       e.preventDefault()
       const zoomFactor = 0.08
       if (e.deltaY < 0) {
-        setScale(prev => Math.min(prev + zoomFactor, 4))
+        setScale((prev: number) => Math.min(prev + zoomFactor, 4))
       } else {
-        setScale(prev => Math.max(prev - zoomFactor, 0.5))
+        setScale((prev: number) => Math.max(prev - zoomFactor, 0.5))
       }
     }
 
@@ -59,8 +60,8 @@ export default function DiagramModal({ onClose, svgPath, title }: DiagramModalPr
     }
   }, [])
 
-  const handleZoomIn = () => setScale(prev => Math.min(prev + 0.25, 4))
-  const handleZoomOut = () => setScale(prev => Math.max(prev - 0.25, 0.5))
+  const handleZoomIn = () => setScale((prev: number) => Math.min(prev + 0.25, 4))
+  const handleZoomOut = () => setScale((prev: number) => Math.max(prev - 0.25, 0.5))
   const handleReset = () => {
     setScale(1)
     setPosition({ x: 0, y: 0 })
@@ -126,14 +127,25 @@ export default function DiagramModal({ onClose, svgPath, title }: DiagramModalPr
             </p>
           </div>
           
-          <button 
-            type="button" 
-            onClick={onClose}
-            className="p-2 text-white/60 hover:text-yellow hover:bg-white/5 rounded-lg transition-colors"
-            aria-label="Close modal"
-          >
-            <IconX size={20} />
-          </button>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/architecture"
+              className="px-4 py-2 bg-yellow hover:bg-yellow-hover text-dark text-xs font-bold uppercase tracking-wider rounded transition-colors flex items-center gap-1.5 font-semibold"
+              onClick={onClose}
+            >
+              <IconSitemap size={16} />
+              <span className="hidden sm:inline">Interactive Mind Map</span>
+              <span className="inline sm:hidden">Interactive</span>
+            </Link>
+            <button 
+              type="button" 
+              onClick={onClose}
+              className="p-2 text-white/60 hover:text-yellow hover:bg-white/5 rounded-lg transition-colors"
+              aria-label="Close modal"
+            >
+              <IconX size={20} />
+            </button>
+          </div>
         </div>
 
         {/* Viewport Area */}
