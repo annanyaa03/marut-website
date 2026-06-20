@@ -99,12 +99,14 @@ function getSnapshot() {
   return snapshot
 }
 
+const serverSnapshot: GitHubContextType = {
+  data: fallbackGitHubData,
+  loading: false,
+  error: false,
+}
+
 function getServerSnapshot() {
-  return {
-    data: fallbackGitHubData,
-    loading: false,
-    error: false,
-  }
+  return serverSnapshot
 }
 
 export function GitHubProvider({ children }: { children: React.ReactNode }) {

@@ -4,7 +4,7 @@ import { useState, useEffect, useReducer } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
-import { IconBrandGithub, IconMenu2, IconChevronDown, IconBook, IconCpu, IconBinary } from '@tabler/icons-react'
+import { IconBrandGithub, IconMenu2, IconChevronDown, IconBook, IconCpu, IconBinary, IconSitemap } from '@tabler/icons-react'
 
 interface NavState {
   scrolled: boolean
@@ -30,6 +30,7 @@ export default function Nav() {
       label: 'RESOURCES',
       isDropdown: true,
       dropdownItems: [
+        { href: '/architecture', label: 'System Architecture', desc: 'Interactive system mind map', icon: IconSitemap },
         { href: '/documentation', label: 'Documentation', desc: 'Guides & API manuals', icon: IconBook },
         { href: '/schematics', label: 'Schematics', desc: 'Interactive 3D PCB layout', icon: IconCpu },
         { href: '/firmware', label: 'Firmware', desc: 'Downloadable binaries & source', icon: IconBinary },

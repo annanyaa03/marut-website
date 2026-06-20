@@ -44,8 +44,8 @@ const hwTrack: TrackItem[] = [
 function SubTrack({ items }: { items: TrackItem[] }) {
   return (
     <div className="flex flex-col gap-3">
-      {items.map((item) => (
-        <div key={item.title} className={`p-3.5 rounded border flex items-start gap-3 transition-all duration-300 ${item.status === 'in-progress'
+      {items.map((item, i) => (
+        <div key={`${item.title}-${i}`} className={`p-3.5 rounded border flex items-start gap-3 transition-all duration-300 ${item.status === 'in-progress'
           ? 'bg-yellow/5 border-yellow shadow-[0_0_15px_rgba(0,255,85,0.08)]'
           : 'bg-dark-surface/40 border-dark-border/40'
           }`}>
@@ -138,8 +138,8 @@ export default function Roadmap() {
             </div>
 
             <div className="flex flex-col gap-3">
-              {hwTrack.map((item) => (
-                <div key={item.title} className={`p-3.5 rounded border flex items-center gap-3 transition-all duration-300 ${item.status === 'in-progress'
+              {hwTrack.map((item, i) => (
+                <div key={`${item.title}-${i}`} className={`p-3.5 rounded border flex items-center gap-3 transition-all duration-300 ${item.status === 'in-progress'
                   ? 'bg-yellow/5 border-yellow shadow-[0_0_15px_rgba(0,255,85,0.08)] scale-[1.01]'
                   : item.status === 'done'
                     ? 'bg-dark-surface/20 border-dark-border/40'
